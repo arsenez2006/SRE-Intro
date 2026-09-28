@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: gateway
-          image: ghcr.io/arsenez2006/quickticket-gateway:43121f9f5c88e4a79a9322a3c10cc408e79849d0
+          image: ghcr.io/arsenez2006/quickticket-gateway:1d72368a957f486411aacb8a4d783686492b9e74
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

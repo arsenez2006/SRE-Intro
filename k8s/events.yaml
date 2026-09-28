@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: events
-          image: quickticket-events:v1
-          imagePullPolicy: Never
+          image: ghcr.io/arsenez2006/quickticket-events:43121f9f5c88e4a79a9322a3c10cc408e79849d0
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
           env:

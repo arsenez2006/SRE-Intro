@@ -33,6 +33,14 @@ spec:
         app: gateway
         version: "v2"
     spec:
+      terminationGracePeriodSeconds: 40
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: gateway
       containers:
         - name: gateway
           image: ghcr.io/arsenez2006/quickticket-gateway:1d72368a957f486411aacb8a4d783686492b9e74
@@ -48,6 +56,10 @@ spec:
               value: "5000"
             - name: APP_VERSION
               value: "v2-multistep"
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sh", "-c", "sleep 10"]
           livenessProbe:
             httpGet:
               path: /health
@@ -59,8 +71,8 @@ spec:
             httpGet:
               path: /health
               port: 8080
-            periodSeconds: 5
-            failureThreshold: 2
+            periodSeconds: 2
+            failureThreshold: 1
           resources:
             requests:
               cpu: 50m
